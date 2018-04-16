@@ -1,45 +1,47 @@
 export default {
-  outSelect: [
+  // 外部过滤筛选的默认配置
+  outFilterDefault: [
     {
-      name: '地区',
       id: 'area',
+      title: '地区',
       val: ''
     },
     {
-      name: '品牌',
       id: 'brand',
+      title: '品牌',
       val: '',
     },
     {
-      name: '车辆级别',
       id: 'level',
-      val: [],
-    },
-    {
-      name: '价格',
-      id: 'price',
+      title: '车辆级别',
       val: '',
     },
     {
-      name: '来源平台',
+      id: 'price',
+      title: '价格',
+      val: '',
+    },
+    {
       id: 'carSource',
-      val: [],
+      title: '来源平台',
+      val: '',
     }
   ],
-  innerSelect: [
+  // 内部筛选的默认配置
+  innerFilterDefault: [
     {
-      name: '里程(万公里)',
       id: 'mile',
+      title: '里程(万公里)',
       val: '',
-      min: '',
-      max: '',
-      type: 'define',
-      useDefine: false,
-      maxErrorTip: '',
-      minErrorTip: '',
-      maxErrorVisiable: false,
-      minErrorVisiable: false,
-      defineTitle: '自定义里程',
+      type: 'single',
+      define: {
+        used: false,
+        title: '自定义里程',
+        min: '',
+        max: '',
+        errorTip: '',
+        showError: false,
+      },
       options: [{
           title: '不限',
           value: ''
@@ -67,11 +69,10 @@ export default {
       ]
     },
     {
-      name: '年龄(年)',
       id: 'year',
+      title: '年龄(年)',
       val: '',
-      min: '',
-      max: '',
+      type: 'single',
       options: [{
           title: '不限',
           value: ''
@@ -99,9 +100,10 @@ export default {
       ]
     },
     {
-      name: '排量(L)',
       id: 'liter',
+      title: '排量(L)',
       val: '',
+      type: 'single',
       options: [{
           title: '不限',
           value: ''
@@ -137,9 +139,10 @@ export default {
       ]
     },
     {
-      name: '变速箱',
       id: 'gear',
+      title: '变速箱',
       val: '0',
+      type: 'single',
       options: [{
           title: '不限',
           value: '0'
@@ -155,9 +158,10 @@ export default {
       ]
     },
     {
-      name: '发动机',
       id: 'engine',
+      title: '发动机',
       val: '',
+      type: 'single',
       options: [{
           title: '不限',
           value: ''
@@ -173,9 +177,10 @@ export default {
       ]
     },
     {
-      name: '标准排放',
       id: 'ds',
+      title: '标准排放',
       val: '',
+      type: 'single',
       options: [{
           title: '不限',
           value: ''
@@ -199,9 +204,10 @@ export default {
       ]
     },
     {
-      name: '车源类型',
       id: 'sellerType',
+      title: '车源类型',
       val: '',
+      type: 'single',
       options: [{
           title: '不限',
           value: ''
@@ -217,9 +223,10 @@ export default {
       ]
     },
     {
-      name: '产地',
       id: 'makerType',
+      title: '产地',
       val: '',
+      type: 'single',
       options: [{
           title: '不限',
           value: ''

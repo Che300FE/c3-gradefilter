@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="https://fezz.che300.com/libs/reset/reset.css">
+  <script src="https://f.alicdn.com/flexible/0.3.2/flexible.js"></script>
+  <script src="https://fezz.che300.com/libs/fastclick/fastclick.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="../dist/index.js"></script>
+  <script src="./area_picker.min.js"></script>
+  <title>高级筛选Demo</title>
+</head>
+<body>
+  <div id="app">
+    <button @click.stop="showGradeFilter">点击我显示高级筛选组件</button>
+    <p>
+      {{message}}
+    </p>
+    
+    <c3-grade-filter 
+      :visiable="visiable"
+      :go-back="goBack"
+      :out-filter-config="outFilterConfig"
+      :inner-filter-config="innerFilterConfig"
+      :car-source-num="carSourceNum"
+      :car-source-click="carSourceClick"
+      :filter-change="filterChange"
+      :out-select-click="outSelectClick">
+    </c3-grade-filter>
+
+    <!-- 地区选择的组件 -->
+    <che-area-selector
+      :visiable="showSelector"
+      :show-cur-city="false"
+      :select-finsh="selectFinsh">
+    </che-area-selector>
+  </div>
+</body>
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        // 是否显示高级筛选组件
+        visiable: false,
+        // 地区选择组件是否显示标识符
+        showSelector: false,
+        
+        // 筛选配置 如果为 ''，则表示为默认配置
+        // 如果想自定义配置, 则可设置为一个对象
+        // 具体配置项请查看 'src/config/filterDefaultConfig.js' 按其配置即可
+
+        // 外部筛选配置
+        outFilterConfig: {
+          area: '',  // 地区
+          brand: '', // 品牌
+          level: '', // 车辆级别
+          price: '', // 价格
+          carSource: '', // 来源平台
+        },
+
+        // 内部筛选配置
+        innerFilterConfig: {
+          mile: '', // 里程
+          year: '', // 年龄
+          liter: '', // 排量
+          gear: '', // 变速箱
+          engine: '', // 发动机
+          ds: '', // 标准排放
+          sellerType: '', // 车源类型
+          makerType: '', // 产地
+        },
+        
+        // 当前车源信息的个数
+        carSourceNum: 0,
+        message: ''
+      }
+    },
+    methods: {
+      // 点击按钮显示高级筛选组件
+      showGradeFilter () {
+        this.visiable = true;
+      },
+      // 点击左上角的返回按钮的回调函数
+      goBack () {
+        this.visiable = false;
+      },
+      // 点击车源时的回调函数
+      carSourceClick () {
+        console.log("点我就查看车源了");
+      },
+      // 当过滤项目发生改变的时候 触发的函数
+      // params 对象包含了各个过滤项的具体值
+      filterChange (params) {
+        this.message = '你对筛选过滤项做了修改, 此时的筛选数据请查看控制台';
+        console.log('你对筛选过滤项做了修改, 此时的筛选数据请查看控制台');
+        console.log(params);
+      },
+      // 点击外部选择组件时 触发的函数
+      // component 外部组件信息对象
+      outSelectClick (component) {
+        this.message = '你点击了一个外部选择组件, 组件信息请查案控制台';
+        console.log('你点击了一个外部选择组件, 组件信息请查案控制台');
+        console.log('组件信息', component);
+        
+        this.component = component;
+        if (component.id === "area") {
+          this.showSelector = true;
+        }
+      },
+      // 地区选择后的回调函数
+      selectFinsh: function(city) {
+        this.showSelector = false;
+        this.selectedCity = city;
+        this.component.val = city.name;
+        // 推荐使用这种生成一个 指向内存地址的 对象
+        // 便于vue watch到对象的变化进行操作
+        this.outFilterConfig = Object.assign({}, this.outFilterConfig, this.component);
+      },
+    }
+  })
+</script>
+</html>

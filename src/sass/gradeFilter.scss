@@ -1,5 +1,5 @@
 .grade-filter{
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
@@ -74,6 +74,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             width: 90%;
+            text-align: right;
           }
 
           .out-select__no-limit{
@@ -120,24 +121,26 @@
 
           .pop-up{
             position: absolute;
-            top: -1.2rem;
+            top: -1.0rem;
             right: 0;
-            padding: .20rem /* 10/37.5 */;
+            padding: .10rem /* 10/37.5 */;
             background-color: rgba($color: #666666, $alpha: 1);
             border-radius: 4px;
             color: #ffffff;
+            font-size: 12px;
 
             &:after{
               content: '';
               display: block;
               position: absolute;
               left: calc(50% - .2rem);
+              top: .4rem;
               width: 0;
               height: 0;
               border-bottom: .2rem solid rgba($color: #666666, $alpha: 1);
               border-right: .2rem solid rgba($color: #666666, $alpha: 1);
-              border-left: .2rem solid rgba($color: #ffffff, $alpha: 0);
-              border-top: .2rem solid rgba($color: #ffffff, $alpha: 0);
+              border-left: .2rem solid rgba($color: #666666, $alpha: 0);
+              border-top: .2rem solid rgba($color: #666666, $alpha: 0);
               transform: rotate(45deg);
             }
           }

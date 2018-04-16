@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <grade-filter></grade-filter>
+    <grade-filter 
+      :out-filter-config="outFilterConfig" 
+      :inner-filter-config="innerFilterConfig">
+    </grade-filter>
   </div>
 </template>
 
@@ -13,6 +16,14 @@ export default {
   },
   data () {
     return {
+      outFilterConfig: {
+        area: {
+          val: '南京'
+        }
+      },
+      innerFilterConfig: {
+
+      }
     }
   }
 }
