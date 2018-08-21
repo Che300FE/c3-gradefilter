@@ -28,7 +28,9 @@
       :car-source-num="carSourceNum"
       :car-source-click="carSourceClick"
       :filter-change="filterChange"
-      :out-select-click="outSelectClick">
+      :out-select-click="outSelectClick"
+      :car-source-visiable="carSourceVisiable"
+      :reload="true">
     </c3-grade-filter>
 
     <!-- 地区选择的组件 -->
@@ -75,6 +77,7 @@
           makerType: '', // 产地
         },
         
+        carSourceVisiable: true,
         // 当前车源信息的个数
         carSourceNum: 0,
         message: ''
@@ -119,7 +122,11 @@
         this.component.val = city.name;
         // 推荐使用这种生成一个 指向内存地址的 对象
         // 便于vue watch到对象的变化进行操作
-        this.outFilterConfig = Object.assign({}, this.outFilterConfig, this.component);
+        this.outFilterConfig = Object.assign({}, this.outFilterConfig, {
+          area: {
+            val: this.component.val 
+          }
+        });
       },
     }
   })

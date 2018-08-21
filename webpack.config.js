@@ -1,13 +1,14 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
+var env = process.env.NODE_ENV;
+var entry = env === 'development' ? './src/main.js' : './src/components/index.js';
 
 module.exports = {
-  entry: './src/main.js',
-  // entry: './src/components/index.js',
+  entry: entry,
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js',
+    filename: 'index.js',
     library: 'C3GradeFilter',
     libraryTarget: 'umd',
     umdNamedDefine: true

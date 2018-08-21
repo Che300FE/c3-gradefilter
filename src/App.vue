@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <grade-filter 
-      :out-filter-config="outFilterConfig" 
-      :inner-filter-config="innerFilterConfig">
+    <button type="button" @click="showGradeFilter">显示</button>
+    <grade-filter
+      :visible="visible"
+      :out-filter-config="outFilterConfig"
+      :inner-filter-config="innerFilterConfig"
+      :filter-change="filterChange">
     </grade-filter>
   </div>
 </template>
@@ -16,14 +19,37 @@ export default {
   },
   data () {
     return {
+      visible: false,
       outFilterConfig: {
         area: {
-          val: '南京'
-        }
+          val: '全国'
+        },  // 地区
+        brand: '', // 品牌
+        level: '', // 车辆级别
+        price: '', // 价格
+        carSource: '', // 来源平台
       },
-      innerFilterConfig: {
 
-      }
+      // 内部筛选配置
+      innerFilterConfig: {
+	      mileage: '', // 里程
+        year: '', // 年龄
+        liter: '', // 排量
+        gear: '', // 变速箱
+        engine: '', // 发动机
+	      discharge_standard: '', // 标准排放
+	      color: '', // 颜色
+        sellerType: '', // 车源类型
+        makerType: '', // 产地
+      },
+    }
+  },
+  methods: {
+    filterChange (params) {
+      console.log(params);
+    },
+    showGradeFilter() {
+      this.visible = true;
     }
   }
 }

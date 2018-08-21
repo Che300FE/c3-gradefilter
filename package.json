@@ -1,7 +1,7 @@
 {
   "name": "c3-grade-filter",
   "description": "车300高级筛选选择器组件",
-  "version": "0.0.1",
+  "version": "0.1.9",
   "author": "carver <1084024036@qq.com>",
   "license": "MIT",
   "scripts": {
@@ -9,6 +9,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "better-scroll": "^1.11.0",
+    "jquery": "^3.3.1",
     "vue": "^2.5.11"
   },
   "browserslist": [
