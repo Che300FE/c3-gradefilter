@@ -42,10 +42,12 @@
             </div>
             <div class="define__input define__split">
               <input
-                  type="number"
+                  :type="defineInputType"
                   class="define__min"
                   v-model="item.define.min"
-                  @input="defineValChange(item)">
+                  @input="defineValChange(item)"
+                  @focus="defineValFocus"
+                  @blur="defineValBlur">
             </div>
             <div class="define__input">
               <div class="pop-up"
@@ -53,10 +55,12 @@
                 {{item.define.errorTip}}
               </div>
               <input
-                  type="number"
+                  :type="defineInputType"
                   class="define__max"
                   v-model="item.define.max"
-                  @input="defineValChange(item)">
+                  @input="defineValChange(item)"
+                  @focus="defineValFocus"
+                  @blur="defineValBlur">
             </div>
           </div>
           <ul class="general__list">
@@ -169,6 +173,7 @@ export default {
       outFilterArr: [],
       innerFilterArr: [],
       scroll: null,
+      defineInputType: 'number'
     }
   },
   watch: {
@@ -284,25 +289,42 @@ export default {
       var min = Number(item.define.min);
       var max = Number(item.define.max);
 
-      // TODO 考虑输入小数的情况
-
-      if (typeof min !== 'number' || isNaN(min)) {
-        min = item.define.min = 0;
+      if (isNaN(min)) {
+        item.define.min = ''
+        return
       }
 
-      if (typeof max !== 'number' || isNaN(max)) {
-        max = item.define.max = 0;
+      if (isNaN(max)) {
+        item.define.max = ''
+        return
       }
 
-      if (min <= max) {
+      if (min !== 0 && max !== 0 && min <= max) {
         item.define.used = true;
         item.define.showError = false;
         this.createFilterParams();
+      } else if (min === 0 && max === 0) {
+        item.define.used = false
+        item.define.showError = false
+        item.val = this.innerFilterArr.find(innerConf => {
+          return innerConf.id === item.id
+        }).val
+        this.createFilterParams()
       } else {
         item.define.used = false;
         item.define.errorTip = '请从低到高输入';
         item.define.showError = true;
       }
+    },
+    
+    // 自定义值的输入框获取焦点时触发
+    defineValFocus(){
+      this.defineInputType = 'text'
+    },
+    
+    // 自定义的值失去焦点的时候触发
+    defineValBlur() {
+      this.defineInputType = 'number'
     },
 
     // 当筛选值发生改变时 生成新的过滤参数

@@ -1,7 +1,7 @@
 {
   "name": "c3-grade-filter",
   "description": "车300高级筛选选择器组件",
-  "version": "0.1.9",
+  "version": "0.1.14",
   "author": "carver <1084024036@qq.com>",
   "license": "MIT",
   "scripts": {
